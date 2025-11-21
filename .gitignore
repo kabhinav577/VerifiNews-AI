@@ -21,3 +21,10 @@ Thumbs.db
 
 # Ignore Jupyter Notebook checkpoints
 .ipynb_checkpoints/
+
+# In your .gitignore
+models/distilbert_fake_news/
+models/*.pkl
+models/*.h5
+models/*.pt
+!models/README.md  # Keep documentation
