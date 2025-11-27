@@ -24,6 +24,9 @@ Thumbs.db
 
 # In your .gitignore
 models/distilbert_fake_news/
+models/mobilebert_fake_news/
+notebooks/results_distilbert/
+notebooks/results_mobilebert/
 models/*.pkl
 models/*.h5
 models/*.pt
