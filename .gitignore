@@ -31,3 +31,6 @@ models/*.pkl
 models/*.h5
 models/*.pt
 !models/README.md  # Keep documentation
+.venv/
+.env
+frontend/node_modules/
