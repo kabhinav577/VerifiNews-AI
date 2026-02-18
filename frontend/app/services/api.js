@@ -24,3 +24,62 @@ export const predictNews = async (text, model) => {
     );
   }
 };
+
+// GNews API Configuration
+const GNEWS_API_KEY = process.env.GNEWS_API_KEY;
+const GNEWS_BASE_URL = 'https://gnews.io/api/v4';
+
+/**
+ * Fetches top headlines from GNews
+ * @returns {Promise<Array>} List of articles
+ */
+export const getTopHeadlines = async () => {
+  if (!GNEWS_API_KEY) {
+    console.error('GNEWS_API_KEY is missing');
+    return [];
+  }
+
+  try {
+    const res = await fetch(
+      `${GNEWS_BASE_URL}/top-headlines?category=general&lang=en&max=20&apikey=${GNEWS_API_KEY}`,
+      { next: { revalidate: 3600 } }
+    );
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch news: ${res.status}`);
+    }
+
+    const data = await res.json();
+    return data.articles || [];
+  } catch (error) {
+    console.error('Error fetching news:', error);
+    return [];
+  }
+};
+
+/**
+ * Fetches a single article by searching for its title
+ * @param {string} title - The title of the article to search for
+ * @returns {Promise<Object|null>} The article object or null
+ */
+export const getArticleByTitle = async (title) => {
+  if (!GNEWS_API_KEY) return null;
+
+  try {
+    const encodedTitle = encodeURIComponent(title);
+    const res = await fetch(
+      `${GNEWS_BASE_URL}/search?q="${encodedTitle}"&lang=en&max=1&apikey=${GNEWS_API_KEY}`,
+      { cache: 'no-store' }
+    );
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch article');
+    }
+
+    const data = await res.json();
+    return data.articles?.[0] || null;
+  } catch (error) {
+    console.error('Error fetching article:', error);
+    return null;
+  }
+};
