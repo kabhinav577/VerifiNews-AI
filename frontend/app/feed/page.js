@@ -1,4 +1,4 @@
-import { getTopHeadlines } from '../services/api';
+import { fetchCategorizedNews } from '../actions/newsActions';
 import FeedList from './FeedList';
 
 export const metadata = {
@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function FeedPage() {
-  const articles = await getTopHeadlines();
+  const articles = await fetchCategorizedNews('general', 1);
 
   return (
     <div className="min-h-screen bg-gray-50/50 py-12">
