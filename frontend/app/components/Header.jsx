@@ -46,9 +46,9 @@ export default function Header() {
       <div className="container mx-auto px-4 h-20 flex items-center justify-between max-w-7xl">
         <div className="flex items-center gap-12">
           <Link href="/" className="flex items-center gap-2">
-            <div className="relative w-[10rem] h-[4rem]">
+            <div className="relative w-[10rem] h-[10rem]">
               <Image 
-                src="/logo.png" 
+                src="/logo-2.png" 
                 alt="VerifiNews-AI Logo" 
                 fill
                 className="object-contain"

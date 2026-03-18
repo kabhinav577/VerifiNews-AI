@@ -6,3 +6,6 @@ scipy
 pandas
 numpy
 nltk
+lxml==6.0.2
+newspaper3k==0.2.8
+nltk==3.9.2

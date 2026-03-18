@@ -25,6 +25,28 @@ export const predictNews = async (text, model) => {
   }
 };
 
+/**
+ * Sends a prediction request for a URL to the backend API
+ * @param {string} url - The news article URL
+ * @param {string} model - The model to use: 'distilbert', 'mobilebert', or 'tfidf_gb'
+ * @returns {Promise<Object>} Response containing prediction, model_used, confidence, and extracted info
+ */
+export const predictUrl = async (url, model) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}/predict-url`, {
+      url: url,
+      model: model,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw new Error(
+      error.response?.data?.detail || 
+      'Failed to connect to the backend. Please ensure the server is running at http://127.0.0.1:8000'
+    );
+  }
+};
+
 // GNews API Configuration
 const GNEWS_API_KEY = process.env.GNEWS_API_KEY;
 const GNEWS_BASE_URL = 'https://gnews.io/api/v4';

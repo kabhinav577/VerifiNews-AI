@@ -7,6 +7,19 @@ export default function HistoryList({ refreshTrigger }) {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [expandedItems, setExpandedItems] = useState(new Set());
+
+  const toggleExpand = (id) => {
+    setExpandedItems(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(id)) {
+        newSet.delete(id);
+      } else {
+        newSet.add(id);
+      }
+      return newSet;
+    });
+  };
 
   const fetchHistory = useCallback(async () => {
     setLoading(true);
@@ -123,11 +136,48 @@ export default function HistoryList({ refreshTrigger }) {
                   </div>
                </div>
 
-               <p className="text-sm text-slate-800 leading-relaxed font-medium line-clamp-3">
-                  "{item.text}"
-               </p>
+               <div className="relative">
+                 <p className={`text-sm text-slate-800 leading-relaxed font-medium transition-all duration-300 ${
+                   expandedItems.has(item.id) ? '' : 'line-clamp-3'
+                 }`}>
+                    "{item.text}"
+                 </p>
+                 
+                 {item.text && item.text.length > 150 && (
+                   <button 
+                     onClick={() => toggleExpand(item.id)}
+                     className="text-blue-600 text-xs font-bold hover:text-blue-700 mt-2 transition-colors flex items-center gap-1"
+                   >
+                     {expandedItems.has(item.id) ? (
+                       <>Show Less <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clipRule="evenodd" /></svg></>
+                     ) : (
+                       <>Read Full Article <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" /></svg></>
+                     )}
+                   </button>
+                 )}
+               </div>
                
-               <div className="mt-4 flex items-center gap-1.5 text-xs text-slate-400 font-medium border-t border-slate-100 pt-3">
+               {/* Derived Metrics */}
+               <div className="flex gap-4 mt-4 pt-4 border-t border-slate-100">
+                  <div className="flex items-center gap-2">
+                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Bias:</span>
+                     <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
+                        item.prediction.toLowerCase() === 'fake' ? 'bg-orange-50 text-orange-700' : 'bg-green-50 text-green-700'
+                     }`}>
+                        {item.prediction.toLowerCase() === 'fake' ? 'High' : 'Low'}
+                     </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                     <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sentiment:</span>
+                     <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
+                        item.prediction.toLowerCase() === 'fake' ? 'bg-red-50 text-red-700' : 'bg-blue-50 text-blue-700'
+                     }`}>
+                        {item.prediction.toLowerCase() === 'fake' ? 'Negative' : 'Neutral'}
+                     </span>
+                  </div>
+               </div>
+
+               <div className="mt-3 flex items-center gap-1.5 text-xs text-slate-400 font-medium">
                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z" clipRule="evenodd" />
                  </svg>

@@ -29,9 +29,9 @@ export default function ResultCard({ result }) {
     barColor = 'bg-red-600';
   }
 
-  // Mock indicators based on prediction (since backend doesn't provide them yet)
+  // Sentiment from backend or mock fallback
   const bias = isReal ? 'Low' : 'High';
-  const sentiment = isReal ? 'Neutral' : 'Negative';
+  const sentiment = result.sentiment ? result.sentiment.label : (isReal ? 'Neutral' : 'Negative');
   const facts = isReal ? 'Verified' : 'Unverified';
 
   return (

@@ -4,6 +4,8 @@ from pydantic import BaseModel
 import torch
 import joblib
 import re
+from sentiment import analyze_sentiment
+from newspaper import Article
 
 from transformers import (
     DistilBertTokenizerFast,
@@ -82,6 +84,10 @@ mobile_model.eval()
 # ==================================================
 class PredictionRequest(BaseModel):
     text: str
+    model: str  # distilbert | mobilebert | tfidf_gb
+
+class UrlPredictionRequest(BaseModel):
+    url: str
     model: str  # distilbert | mobilebert | tfidf_gb
 
 # ==================================================
@@ -171,9 +177,61 @@ def predict(request: PredictionRequest):
             "error": "Invalid model. Use: distilbert | mobilebert | tfidf_gb"
         }
 
+    # Get Sentiment
+    sentiment_data = analyze_sentiment(request.text)
+
     # IMPORTANT: Label interpretation matches cleaning notebook
     return {
         "model_used": request.model,
         "prediction": "Real News" if label == 1 else "Fake News",
-        "confidence": round(conf, 4)
+        "confidence": round(conf, 4),
+        "sentiment": sentiment_data
     }
+
+@app.post("/predict-url")
+def predict_url(request: UrlPredictionRequest):
+    try:
+        article = Article(request.url)
+        article.download()
+        article.parse()
+        extracted_text = article.text
+        title = article.title
+        
+        if not extracted_text or len(extracted_text.strip()) < 50:
+            return {
+                "error": "Could not extract sufficient text from the provided URL."
+            }
+
+        # Predict using the extracted text
+        if request.model == "distilbert":
+            label, conf = predict_distilbert(extracted_text)
+        elif request.model == "mobilebert":
+            label, conf = predict_mobilebert(extracted_text)
+        elif request.model == "tfidf_gb":
+            label, conf = predict_tfidf_gb(extracted_text)
+            if label is None:
+                return {
+                    "model_used": "tfidf_gb",
+                    "error": "TF-IDF + Gradient Boosting model not available"
+                }
+        else:
+            return {
+                "error": "Invalid model. Use: distilbert | mobilebert | tfidf_gb"
+            }
+
+        sentiment_data = analyze_sentiment(extracted_text)
+
+        return {
+            "model_used": request.model,
+            "prediction": "Real News" if label == 1 else "Fake News",
+            "confidence": round(conf, 4),
+            "sentiment": sentiment_data,
+            "extracted_title": title,
+            "extracted_text": extracted_text[:1000] + "..." if len(extracted_text) > 1000 else extracted_text
+        }
+        
+    except Exception as e:
+         return {
+             "error": f"Failed to process URL: {str(e)}"
+         }
+
