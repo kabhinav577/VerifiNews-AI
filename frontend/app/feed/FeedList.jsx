@@ -110,7 +110,7 @@ export default function FeedList({ initialArticles }) {
             <input
               type="url"
               placeholder="Paste a news article URL to verify..."
-              className="w-full pl-6 pr-36 py-4 bg-white border border-gray-200 rounded-full shadow-sm focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all text-gray-700"
+              className="w-full pl-6 pr-36 py-4 bg-white dark:bg-brand-dark border border-gray-200 dark:border-brand-border rounded-full shadow-sm focus:ring-2 focus:ring-blue-100 focus:border-blue-400 outline-none transition-all text-gray-700 dark:text-slate-300"
               value={verifyUrl}
               onChange={(e) => setVerifyUrl(e.target.value)}
               disabled={verifying}
@@ -164,13 +164,13 @@ export default function FeedList({ initialArticles }) {
 
         {/* Language Toggle */}
         <div className="flex justify-center mb-6">
-           <div className="inline-flex bg-slate-100 rounded-full p-1 border border-slate-200/60 shadow-inner">
+           <div className="inline-flex bg-slate-100 dark:bg-brand-card rounded-full p-1 border border-slate-200/60 dark:border-brand-border shadow-inner">
              <button
                onClick={() => handleLanguageChange('en')}
                className={`px-5 py-2 rounded-full text-sm font-bold transition-all ${
                  language === 'en' 
-                 ? 'bg-white text-blue-600 shadow-sm' 
-                 : 'text-slate-500 hover:text-slate-700'
+                 ? 'bg-white dark:bg-brand-hover text-blue-600 shadow-sm' 
+                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
                }`}
              >
                English
@@ -179,8 +179,8 @@ export default function FeedList({ initialArticles }) {
                onClick={() => handleLanguageChange('hi')}
                className={`px-5 py-2 rounded-full text-sm font-bold transition-all flex items-center gap-1.5 ${
                  language === 'hi' 
-                 ? 'bg-white text-blue-600 shadow-sm' 
-                 : 'text-slate-500 hover:text-slate-700'
+                 ? 'bg-white dark:bg-brand-hover text-blue-600 shadow-sm' 
+                 : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300'
                }`}
              >
                Hindi (हिंदी)
@@ -197,8 +197,8 @@ export default function FeedList({ initialArticles }) {
               disabled={loadingCategory}
               className={`px-4 py-2 rounded-full text-[13px] sm:text-sm font-medium transition-all ${
                 category === cat.toLowerCase()
-                  ? 'bg-slate-900 text-white shadow-lg shadow-slate-200'
-                  : 'bg-white text-slate-600 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 disabled:opacity-50'
+                  ? 'bg-slate-900 dark:bg-brand-hover text-white shadow-lg shadow-slate-200 dark:shadow-none'
+                  : 'bg-white dark:bg-brand-card text-slate-600 dark:text-slate-400 border border-gray-200 dark:border-brand-border hover:border-gray-300 dark:hover:border-slate-500 hover:bg-gray-50 dark:hover:bg-brand-dark disabled:opacity-50'
               }`}
             >
               {cat}
@@ -227,7 +227,7 @@ export default function FeedList({ initialArticles }) {
               filteredArticles.map((article, index) => (
                 <div 
                   key={`${article.url}-${index}`}
-                  className="bg-white rounded-3xl p-6 border border-gray-100 hover:shadow-xl hover:shadow-slate-200/40 transition-all duration-300 group"
+                  className="bg-white dark:bg-brand-card rounded-3xl p-6 border border-gray-100 dark:border-brand-border hover:shadow-xl hover:shadow-slate-200/40 dark:hover:shadow-black/40 transition-all duration-300 group"
                 >
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex items-center gap-3">
@@ -237,10 +237,10 @@ export default function FeedList({ initialArticles }) {
                          </span>
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-sm font-bold text-gray-900 leading-tight">
+                        <span className="text-sm font-bold text-gray-900 dark:text-slate-200 leading-tight">
                             {article.source?.name}
                         </span>
-                        <span className="text-xs text-gray-500">
+                        <span className="text-xs text-gray-500 dark:text-slate-400">
                             {new Date(article.publishedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} • {new Date(article.publishedAt).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
@@ -257,10 +257,10 @@ export default function FeedList({ initialArticles }) {
                   </div>
 
                   <a href={article.url} target="_blank" rel="noopener noreferrer">
-                    <h3 className="text-lg font-bold text-slate-800 mb-2 leading-snug group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {article.title}
                     </h3>
-                    <p className="text-slate-500 text-sm leading-relaxed mb-4 line-clamp-2">
+                    <p className="text-slate-500 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-2">
                         {article.description}
                     </p>
                   </a>
@@ -288,7 +288,7 @@ export default function FeedList({ initialArticles }) {
               <button 
                 onClick={handleLoadMore}
                 disabled={loadingMore}
-                className="px-8 py-3 bg-white border border-gray-200 text-gray-700 font-semibold rounded-full hover:bg-gray-50 hover:text-blue-600 hover:border-blue-200 transition-all shadow-sm focus:ring-4 focus:ring-blue-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
+                className="px-8 py-3 bg-white dark:bg-brand-card border border-gray-200 dark:border-brand-border text-gray-700 dark:text-slate-300 font-semibold rounded-full hover:bg-gray-50 dark:hover:bg-brand-hover hover:text-blue-600 dark:hover:text-blue-400 transition-all shadow-sm focus:ring-4 focus:ring-blue-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 mx-auto"
               >
                   {loadingMore ? (
                     <>

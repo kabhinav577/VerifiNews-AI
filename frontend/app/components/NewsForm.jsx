@@ -102,7 +102,7 @@ export default function NewsForm({ onAnalysisComplete }) {
             onChange={handleTextChange}
             placeholder="Paste the news article text here..."
             rows={8}
-            className="w-full px-6 py-6 border-0 focus:ring-0 resize-none text-lg text-slate-700 placeholder:text-slate-400 font-sans bg-transparent"
+            className="w-full px-6 py-6 border-0 focus:ring-0 resize-none text-lg text-slate-700 dark:text-slate-200 placeholder:text-slate-400 font-sans bg-transparent"
             disabled={loading}
           />
           {warning && (
@@ -115,17 +115,17 @@ export default function NewsForm({ onAnalysisComplete }) {
         </div>
 
         {/* Footer Actions */}
-        <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-4 bg-gray-50/50 border-t border-slate-100">
+        <div className="flex flex-col md:flex-row gap-4 items-center justify-between p-4 bg-gray-50/50 dark:bg-brand-card/50 border-t border-slate-100 dark:border-brand-border">
             {/* Model Selection */}
             <div className="flex items-center gap-3 w-full md:w-auto">
-              <span className="text-sm font-medium text-slate-500 whitespace-nowrap">AI Model:</span>
+              <span className="text-sm font-medium text-slate-500 dark:text-slate-400 whitespace-nowrap">AI Model:</span>
               <div className="relative">
                   <select
                   id="model-select"
                   value={model}
                   onChange={(e) => setModel(e.target.value)}
                   disabled={loading}
-                  className="pl-3 pr-8 py-2 border border-slate-200 rounded-lg text-sm font-semibold text-slate-700 bg-white hover:border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none cursor-pointer appearance-none transition-all"
+                  className="pl-3 pr-8 py-2 border border-slate-200 dark:border-brand-border rounded-lg text-sm font-semibold text-slate-700 dark:text-slate-300 bg-white dark:bg-brand-dark hover:border-slate-300 dark:hover:border-slate-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none cursor-pointer appearance-none transition-all"
                   >
                   {modelOptions.map((option) => (
                       <option key={option.value} value={option.value}>

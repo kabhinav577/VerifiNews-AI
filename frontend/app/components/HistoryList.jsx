@@ -86,13 +86,13 @@ export default function HistoryList({ refreshTrigger }) {
   return (
     <div className="w-full mt-10">
       <div className="flex items-center gap-2 mb-6">
-         <h2 className="text-xl font-bold text-slate-900">Recent Verifications</h2>
-         <span className="bg-slate-100 text-slate-500 text-xs font-bold px-2 py-0.5 rounded-full">{history.length}</span>
+         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Recent Verifications</h2>
+         <span className="bg-slate-100 dark:bg-brand-card text-slate-500 text-xs font-bold px-2 py-0.5 rounded-full">{history.length}</span>
       </div>
       
       <div className="space-y-4 relative">
         {/* Timeline Line */}
-        <div className="absolute left-[20px] top-[10px] bottom-[10px] w-0.5 bg-slate-100 z-0 hidden sm:block"></div>
+        <div className="absolute left-[20px] top-[10px] bottom-[10px] w-0.5 bg-slate-100 dark:bg-brand-border z-0 hidden sm:block"></div>
 
         {history.map((item, index) => (
           <div key={item.id} className="relative z-10 flex flex-col sm:flex-row gap-4 items-start group">
@@ -115,7 +115,7 @@ export default function HistoryList({ refreshTrigger }) {
             </div>
 
             {/* Card Content */}
-            <div className="w-full bg-white rounded-xl shadow-sm border border-slate-200/60 p-5 hover:shadow-md transition-shadow">
+            <div className="w-full bg-white dark:bg-brand-card rounded-xl shadow-sm border border-slate-200/60 dark:border-brand-border p-5 hover:shadow-md transition-shadow">
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2">
                      <span className={`px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider ${
@@ -137,7 +137,7 @@ export default function HistoryList({ refreshTrigger }) {
                </div>
 
                <div className="relative">
-                 <p className={`text-sm text-slate-800 leading-relaxed font-medium transition-all duration-300 ${
+                 <p className={`text-sm text-slate-800 dark:text-slate-300 leading-relaxed font-medium transition-all duration-300 ${
                    expandedItems.has(item.id) ? '' : 'line-clamp-3'
                  }`}>
                     "{item.text}"
@@ -158,7 +158,7 @@ export default function HistoryList({ refreshTrigger }) {
                </div>
                
                {/* Derived Metrics */}
-               <div className="flex gap-4 mt-4 pt-4 border-t border-slate-100">
+               <div className="flex gap-4 mt-4 pt-4 border-t border-slate-100 dark:border-brand-border">
                   <div className="flex items-center gap-2">
                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Bias:</span>
                      <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
