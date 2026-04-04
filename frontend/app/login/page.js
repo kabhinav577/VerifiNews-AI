@@ -47,13 +47,8 @@ export default function Login() {
       </div>
 
       <div className="w-full max-w-[420px] bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] sm:p-10 p-6 border border-gray-100 relative z-10">
-        <div className="flex items-center justify-center gap-3 mb-8">
-           <div className="w-8 h-8 bg-[#2563EB] rounded-lg flex items-center justify-center shadow-sm">
-             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
-                <path fillRule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.642 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.358-.166-2.001A11.954 11.954 0 0110 1.944zM10 14a4 4 0 100-8 4 4 0 000 8zm-1.707-3.707a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4a1 1 0 00-1.414-1.414L9 10.586 8.293 9.879z" clipRule="evenodd" />
-             </svg>
-           </div>
-           <span className="text-xl font-extrabold text-[#0F172A] tracking-tight">VERIFINEWS-AI</span>
+        <div className="flex items-center justify-center mb-4">
+            <Image src="/logo.png" alt="VerifiNews Logo" width={220} height={60} className="object-contain max-h-28 w-auto" priority />
         </div>
 
         <div className="text-center mb-8">

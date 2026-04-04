@@ -256,26 +256,28 @@ export default function FeedList({ initialArticles }) {
                     </Link>
                   </div>
 
-                  <a href={article.url} target="_blank" rel="noopener noreferrer">
+                  <Link href={`/article/${encodeURIComponent(article.title)}`}>
                     <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-2 leading-snug group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {article.title}
                     </h3>
                     <p className="text-slate-500 dark:text-slate-300 text-sm leading-relaxed mb-4 line-clamp-2">
                         {article.description}
                     </p>
-                  </a>
+                  </Link>
 
                   {article.image && (
-                      <div className="relative w-full h-64 rounded-2xl overflow-hidden mt-4 mb-2">
-                           <Image
-                            src={article.image}
-                            alt={article.title}
-                            fill
-                            className="object-cover hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, 800px"
-                            unoptimized={true}
-                          />
-                      </div>
+                      <Link href={`/article/${encodeURIComponent(article.title)}`}>
+                        <div className="relative w-full h-64 rounded-2xl overflow-hidden mt-4 mb-2 cursor-pointer">
+                             <Image
+                              src={article.image}
+                              alt={article.title}
+                              fill
+                              className="object-cover hover:scale-105 transition-transform duration-500"
+                              sizes="(max-width: 768px) 100vw, 800px"
+                              unoptimized={true}
+                            />
+                        </div>
+                      </Link>
                   )}
                 </div>
               ))
