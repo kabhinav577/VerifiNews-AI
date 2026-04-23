@@ -250,17 +250,7 @@ export default function Header() {
                    </div>
                 </div>
                 
-                <div className="flex items-center justify-between px-1 py-2 border-t border-slate-100 dark:border-slate-800">
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Dark Mode</span>
-                  {mounted && (
-                    <button 
-                      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                      className="w-12 h-6 rounded-full bg-slate-200 dark:bg-slate-700 relative transition-colors focus:outline-none"
-                    >
-                      <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-transform ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0.5'}`} />
-                    </button>
-                  )}
-                </div>
+                {/* Leftover dark mode toggle removed */}
 
                 <button
                   onClick={handleLogout}
@@ -271,17 +261,7 @@ export default function Header() {
               </div>
             ) : (
               <div className="flex flex-col gap-4">
-                 <div className="flex items-center justify-between px-1 py-2 border-b border-slate-100 dark:border-slate-800">
-                    <span className="text-sm font-medium text-slate-600 dark:text-slate-300">Dark Mode</span>
-                    {mounted && (
-                      <button 
-                        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                        className="w-12 h-6 rounded-full bg-slate-200 dark:bg-slate-700 relative transition-colors focus:outline-none"
-                      >
-                        <div className={`w-5 h-5 rounded-full bg-white absolute top-0.5 transition-transform ${theme === 'dark' ? 'translate-x-6' : 'translate-x-0.5'}`} />
-                      </button>
-                    )}
-                  </div>
+                 {/* Leftover dark mode toggle removed */}
                 <Link
                   href="/login"
                   className="block w-full text-center flex justify-center items-center text-base font-medium text-white bg-blue-600 px-5 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-md mt-2"

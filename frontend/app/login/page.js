@@ -35,6 +35,23 @@ export default function Login() {
     }
   };
 
+  const handleOAuthLogin = async (provider) => {
+    try {
+      setLoading(true);
+      setError(null);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: provider,
+        options: {
+          redirectTo: `${window.location.origin}/`,
+        }
+      });
+      if (error) throw error;
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[#F8FAFC] px-4 py-12 relative overflow-hidden font-sans">
       {/* Background Concentric Circles */}
@@ -130,7 +147,9 @@ export default function Login() {
         <div>
           <button
             type="button"
-            className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 border border-[#E2E8F0] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.02)] bg-white text-[14px] font-semibold text-[#334155] hover:bg-[#F8FAFC] transition-colors"
+            onClick={() => handleOAuthLogin('google')}
+            disabled={loading}
+            className="w-full flex items-center justify-center gap-2.5 py-2.5 px-4 border border-[#E2E8F0] rounded-lg shadow-[0_1px_2px_rgba(0,0,0,0.02)] bg-white text-[14px] font-semibold text-[#334155] hover:bg-[#F8FAFC] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>

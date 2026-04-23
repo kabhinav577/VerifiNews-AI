@@ -16,7 +16,7 @@ export default function ResultCard({ result }) {
   const score = Math.round(confidence * 100);
   
   let statusColor = 'bg-gray-100 text-gray-700';
-  const isFake = result.prediction.toLowerCase() === 'fake';
+  const isFake = result.prediction.toLowerCase().includes('fake');
   
   // Theme colors based on prediction
   const themeColor = {

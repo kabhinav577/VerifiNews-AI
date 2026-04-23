@@ -4,42 +4,45 @@ VerifiNews-AI is a full-stack web application designed to combat misinformation 
 
 ## 🚀 Key Features
 
--   **AI-Powered Verification:** Instantly checks if a news article is likely real or fake using NLP models like DistilBERT and MobileBERT.
--   **Sentiment Analysis:** Integrated VADER Sentiment Analysis to evaluate the emotional tone of articles.
--   **Real-Time News Feed:** Explore categorized news articles (9 distinct categories) sourced dynamically from the **GNews.io API** with seamless pagination ("Load More Stories" functionality).
--   **Live Cricket Scores:** Real-time cricket updates integrated via the Cricbuzz API, featuring graceful fallbacks and retry logic for robust connectivity.
--   **Modern SaaS-Oriented UI:** A completely redesigned, minimalist interface built with Next.js and Tailwind CSS for a premium user experience.
--   **User Authentication & History:** Powered by Supabase, allowing users to securely log in, sign up, and track their past article analyses.
+- **AI-Powered Verification:** Instantly checks if a news article is likely real or fake using NLP models like DistilBERT and MobileBERT.
+- **Sentiment Analysis:** Integrated VADER Sentiment Analysis to evaluate the emotional tone of articles.
+- **Real-Time News Feed:** Explore categorized news articles (9 distinct categories) sourced dynamically from the **GNews.io API** with seamless pagination ("Load More Stories" functionality).
+- **Live Cricket Scores:** Real-time cricket updates integrated via the Cricbuzz API, featuring graceful fallbacks and retry logic for robust connectivity.
+- **Modern SaaS-Oriented UI:** A completely redesigned, minimalist interface built with Next.js and Tailwind CSS for a premium user experience.
+- **User Authentication & History:** Powered by Supabase, allowing users to securely log in, sign up, and track their past article analyses.
 
 ## 🛠 Tech Stack
 
--   **Frontend:** Next.js 14, React, Tailwind CSS, Lucide React
--   **Backend:** Python, FastAPI, Uvicorn
--   **AI/ML:** PyTorch, Transformers (Hugging Face), Scikit-learn, VADER Sentiment Analysis
--   **Database & Auth:** Supabase
--   **External APIs:** GNews.io API (News Aggregation), Cricbuzz API (Live Cricket)
+- **Frontend:** Next.js 14, React, Tailwind CSS, Lucide React
+- **Backend:** Python, FastAPI, Uvicorn
+- **AI/ML:** PyTorch, Transformers (Hugging Face), Scikit-learn, VADER Sentiment Analysis
+- **Database & Auth:** Supabase
+- **External APIs:** GNews.io API (News Aggregation), Cricbuzz API (Live Cricket)
 
 ## 📖 Documentation
 
--   [Product Requirements Document (PRD)](./PRD.md): Detailed project vision, user stories, and requirements.
--   [Knowledge Base](./KNOWLEDGE_BASE.md): Technical architecture, setup guides, and troubleshooting.
+- [Product Requirements Document (PRD)](./PRD.md): Detailed project vision, user stories, and requirements.
+- [Knowledge Base](./KNOWLEDGE_BASE.md): Technical architecture, setup guides, and troubleshooting.
 
 ## 🏁 Getting Started
 
 ### Prerequisites
--   Node.js 18+
--   Python 3.9+
--   Supabase Project
+
+- Node.js 18+
+- Python 3.9+
+- Supabase Project
 
 ### Quick Start
 
 1.  **Clone the repository**
+
     ```bash
     git clone https://github.com/kabhinav577/VerifiNews-AI.git
     cd VerifiNews-AI
     ```
 
 2.  **Start the Backend**
+
     ```bash
     cd backend
     pip install -r requirements.txt
@@ -47,6 +50,7 @@ VerifiNews-AI is a full-stack web application designed to combat misinformation 
     ```
 
 3.  **Start the Frontend** (in a new terminal)
+
     ```bash
     cd frontend
     npm install

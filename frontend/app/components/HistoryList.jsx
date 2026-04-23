@@ -99,11 +99,11 @@ export default function HistoryList({ refreshTrigger }) {
             
             {/* Timeline Dot */}
             <div className={`hidden sm:flex shrink-0 w-10 h-10 rounded-full border-4 border-white items-center justify-center shrink-0 shadow-sm transition-colors mt-2 ${
-                item.prediction.toLowerCase() === 'fake' 
+                item.prediction.toLowerCase().includes('fake') 
                 ? 'bg-red-100 text-red-600' 
                 : 'bg-emerald-100 text-emerald-600'
             }`}>
-                 {item.prediction.toLowerCase() === 'fake' ? (
+                 {item.prediction.toLowerCase().includes('fake') ? (
                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
                      </svg>
@@ -119,7 +119,7 @@ export default function HistoryList({ refreshTrigger }) {
                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                   <div className="flex items-center gap-2">
                      <span className={`px-2.5 py-1 rounded-md text-[11px] font-bold uppercase tracking-wider ${
-                        item.prediction.toLowerCase() === 'fake' 
+                        item.prediction.toLowerCase().includes('fake') 
                         ? 'bg-red-50 text-red-700 border border-red-100' 
                         : 'bg-emerald-50 text-emerald-700 border border-emerald-100'
                      }`}>
@@ -162,17 +162,17 @@ export default function HistoryList({ refreshTrigger }) {
                   <div className="flex items-center gap-2">
                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Bias:</span>
                      <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
-                        item.prediction.toLowerCase() === 'fake' ? 'bg-orange-50 text-orange-700' : 'bg-green-50 text-green-700'
+                        item.prediction.toLowerCase().includes('fake') ? 'bg-orange-50 text-orange-700' : 'bg-green-50 text-green-700'
                      }`}>
-                        {item.prediction.toLowerCase() === 'fake' ? 'High' : 'Low'}
+                        {item.prediction.toLowerCase().includes('fake') ? 'High' : 'Low'}
                      </span>
                   </div>
                   <div className="flex items-center gap-2">
                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Sentiment:</span>
                      <span className={`text-xs font-semibold px-2 py-0.5 rounded ${
-                        item.prediction.toLowerCase() === 'fake' ? 'bg-red-50 text-red-700' : 'bg-blue-50 text-blue-700'
+                        item.prediction.toLowerCase().includes('fake') ? 'bg-red-50 text-red-700' : 'bg-blue-50 text-blue-700'
                      }`}>
-                        {item.prediction.toLowerCase() === 'fake' ? 'Negative' : 'Neutral'}
+                        {item.prediction.toLowerCase().includes('fake') ? 'Negative' : 'Neutral'}
                      </span>
                   </div>
                </div>
