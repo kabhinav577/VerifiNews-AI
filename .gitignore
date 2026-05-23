@@ -34,3 +34,4 @@ models/*.pt
 .venv/
 .env
 frontend/node_modules/
+mobile-app/.expo/   

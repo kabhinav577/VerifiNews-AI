@@ -2,12 +2,34 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../services/supabase';
+import { Trash2 } from 'lucide-react';
 
 export default function HistoryList({ refreshTrigger }) {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [expandedItems, setExpandedItems] = useState(new Set());
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this verification record from history?')) {
+      return;
+    }
+    try {
+      const { error: deleteError } = await supabase
+        .from('analyses')
+        .delete()
+        .eq('id', id);
+
+      if (deleteError) {
+        throw deleteError;
+      }
+
+      setHistory(prev => prev.filter(item => item.id !== id));
+    } catch (err) {
+      console.error('Error deleting history record:', err);
+      alert('Failed to delete history record.');
+    }
+  };
 
   const toggleExpand = (id) => {
     setExpandedItems(prev => {
@@ -129,10 +151,22 @@ export default function HistoryList({ refreshTrigger }) {
                         {(item.confidence * 100).toFixed(1)}% Confidence
                      </span>
                   </div>
-                  <div className="text-xs text-slate-400 font-medium whitespace-nowrap">
-                     {new Date(item.created_at).toLocaleDateString(undefined, {
-                        month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
-                     })}
+                  <div className="flex items-center gap-3">
+                    <span className="text-xs text-slate-400 font-medium whitespace-nowrap">
+                       {new Date(item.created_at).toLocaleDateString(undefined, {
+                          month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit'
+                       })}
+                    </span>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDelete(item.id);
+                      }}
+                      className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-lg transition"
+                      title="Delete from history"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                </div>
 
